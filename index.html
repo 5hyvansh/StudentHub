@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Hub V5</title>
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+body{
+background:#f0f4ff;
+color:#333;
+}
+header{
+background:linear-gradient(135deg, #0b3d91, #1565ff);
+color:white;
+text-align:center;
+padding:35px 20px;
+}
+.logo{
+font-size:65px;
+font-weight:bold;
+margin-bottom:10px;
+}
+header h1{
+font-size:38px;
+margin-bottom:10px;
+}
+header p{
+font-size:18px;
+}
+nav{
+background:white;
+padding:20px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:15px;
+box-shadow:0 3px 12px rgba(0,0,0,0.1);
+}
+nav button{
+background:#1565ff;
+color:white;
+border:none;
+padding:18px 30px;
+border-radius:18px;
+font-size:18px;
+font-weight:bold;
+min-width:180px;
+cursor:pointer;
+}
+.page{
+padding:20px;
+min-height:70vh;
+}
+.hidden{
+display:none;
+}
+.card{
+background:white;
+padding:25px;
+border-radius:20px;
+margin-bottom:20px;
+box-shadow:0 3px 12px rgba(0,0,0,0.1);
+}
+.card h2, .card h3{
+color:#0b3d91;
+margin-bottom:15px;
+}
+.card button{
+width:100%;
+background:#1565ff;
+color:white;
+border:none;
+padding:18px;
+border-radius:15px;
+font-size:18px;
+font-weight:bold;
+margin-top:10px;
+cursor:pointer;
+}
+input{
+width:100%;
+padding:15px;
+border:2px solid #ddd;
+border-radius:12px;
+margin-top:10px;
+margin-bottom:10px;
+font-size:18px;
+}
+.hero{
+background:linear-gradient(135deg, #1565ff, #4f8cff);
+color:white;
+padding:35px;
+border-radius:25px;
+text-align:center;
+margin-bottom:20px;
+}
+.hero h2{
+font-size:32px;
+margin-bottom:10px;
+}
+.hero p{
+font-size:18px;
+}
+.progressBar{
+height:15px;
+background:#ddd;
+border-radius:15px;
+overflow:hidden;
+margin-top:20px;
+}
+.progressFill{
+height:100%;
+width:0%;
+background:#1565ff;
+}
+.correct{
+color:green;
+font-weight:bold;
+font-size:20px;
+}
+.wrong{
+color:red;
+font-weight:bold;
+font-size:20px;
+}
+footer{
+background:#0b3d91;
+color:white;
+text-align:center;
+padding:20px;
+font-size:18px;
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VSKF4XWPNR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VSKF4XWPNR');
+</script>
+</head>
+<body>
+<header>
+<div class="logo">🎓 SH</div>
+<h1>Student Hub</h1>
+<p>Learn • Practice • Improve • Succeed</p>
+</header>
+<nav>
+<button onclick="showPage('home')">🏠 Home</button>
+<button onclick="showPage('english')">📚 English Learning</button>
+<button onclick="showPage('class10')">📘 Class 10</button>
+<button onclick="showPage('class12')">📗 Class 12</button>
+<button onclick="showPage('weekly')">📝 Weekly Test</button>
+<button onclick="showPage('profile')">👤 Profile</button>
+<button onclick="showPage('asksh')">🤖 Ask SH</button>
+</nav>
+<div id="home" class="page">
+<div class="hero">
+<h2>Welcome To Student Hub</h2>
+<p>Your Smart Learning Partner</p>
+</div>
+<div class="card">
+<h3>🔥 Daily Motivation</h3>
+<p id="motivationText">Success starts with one step.</p>
+<button onclick="newMotivation()">New Motivation</button>
+</div>
+<div class="card">
+<h3>🏆 SH Score</h3>
+<h1 id="shScore">0</h1>
+</div>
+<div class="card">
+<h3>📊 Progress</h3>
+<p>Completed Chapters: <b id="chaptersDone">0</b></p><br>
+<p>Rank: <b id="rank">Beginner</b></p>
+</div>
+<div class="card">
+<h3>🌟 Top Features</h3>
+<p>✅ English Learning</p>
+<p>✅ Chapter-wise Revision</p>
+<p>✅ Weekly Tests</p>
+<p>✅ SH Score System</p>
+<p>✅ AI Assistant</p>
+</div>
+</div>
+<div id="english" class="page hidden">
+<h2>📚 English Learning</h2>
+<div class="card">
+<h3>🙋 Self Introduction</h3>
+<button onclick="openRevision('selfintro')">Start Self Introduction</button>
+</div>
+<div class="card">
+<h3>💬 Daily Use Sentences</h3>
+<button onclick="openRevision('daily')">Start Daily Use Sentences</button>
+</div>
+<div class="card">
+<h3>👋 Greetings</h3>
+<button onclick="openRevision('greetings')">Start Greetings</button>
+</div>
+<div class="card">
+<h3>📖 Vocabulary</h3>
+<button onclick="openRevision('vocab')">Start Vocabulary</button>
+</div>
+<div class="card">
+<h3>✍️ Grammar Basics</h3>
+<button onclick="openRevision('grammar')">Start Grammar Basics</button>
+</div>
+</div>
+<div id="class10" class="page hidden">
+<h2>📘 Class 10th Basic</h2>
+<div class="card">
+<button onclick="showPage('math10menu')">📐 Mathematics</button>
+<button onclick="showPage('physics10menu')">⚡ Physics</button>
+<button onclick="showPage('chem10menu')">🧪 Chemistry</button>
+<button onclick="showPage('bio10menu')">🌿 Biology</button>
+</div>
+</div>
+<div id="class12" class="page hidden">
+<h2>📗 Class 12th Basic</h2>
+<div class="card">
+<button onclick="showPage('math12menu')">📊 Mathematics</button>
+<button onclick="showPage('physics12menu')">🔋 Physics</button>
+<button onclick="showPage('chem12menu')">⚗️ Chemistry</button>
+<button onclick="showPage('bio12menu')">🧬 Biology</button>
+</div>
+</div>
+<div id="math10menu" class="page hidden">
+<div class="card">
+<h2>📐 Class 10 Mathematics</h2>
+<button onclick="openRevision('math10ch1')">📖 Chapter 1 – Real Numbers</button>
+<button onclick="openRevision('math10ch2')">📖 Chapter 2 – Polynomials</button>
+</div>
+</div>
+<div id="physics10menu" class="page hidden">
+<div class="card">
+<h2>⚡ Class 10 Physics</h2>
+<button onclick="openRevision('physics10ch1')">📖 Chapter 1 – Light</button>
+<button onclick="openRevision('physics10ch2')">📖 Chapter 2 – Electricity</button>
+</div>
+</div>
+<div id="chem10menu" class="page hidden">
+<div class="card">
+<h2>🧪 Class 10 Chemistry</h2>
+<button onclick="openRevision('chem10ch1')">📖 Chapter 1 – Chemical Reactions</button>
+<button onclick="openRevision('chem10ch2')">📖 Chapter 2 – Acids, Bases & Salts</button>
+</div>
+</div>
+<div id="bio10menu" class="page hidden">
+<div class="card">
+<h2>🌿 Class 10 Biology</h2>
+<button onclick="openRevision('bio10ch1')">📖 Chapter 1 – Life Processes</button>
+<button onclick="openRevision('bio10ch2')">📖 Chapter 2 – Control & Coordination</button>
+</div>
+</div>
+<div id="math12menu" class="page hidden">
+<div class="card">
+<h2>📊 Class 12 Mathematics</h2>
+<button onclick="openRevision('math12ch1')">📖 Chapter 1 – Relations and Functions</button>
+<button onclick="openRevision('math12ch2')">📖 Chapter 2 – Matrices</button>
+</div>
+</div>
+<div id="physics12menu" class="page hidden">
+<div class="card">
+<h2>🔋 Class 12 Physics</h2>
+<button onclick="openRevision('physics12ch1')">📖 Chapter 1 – Charges and Fields</button>
+<button onclick="openRevision('physics12ch2')">📖 Chapter 2 – Electrostatic Potential</button>
+</div>
+</div>
+<div id="chem12menu" class="page hidden">
+<div class="card">
+<h2>⚗️ Class 12 Chemistry</h2>
+<button onclick="openRevision('chem12ch1')">📖 Chapter 1 – Solutions</button>
+<button onclick="openRevision('chem12ch2')">📖 Chapter 2 – Chemical Formulas</button>
+</div>
+</div>
+<div id="bio12menu" class="page hidden">
+<div class="card">
+<h2>🧬 Class 12 Biology</h2>
+<button onclick="openRevision('bio12ch1')">📖 Chapter 1 – Reproduction</button>
+<button onclick="openRevision('bio12ch2')">📖 Chapter 2 – Molecular Inheritance</button>
+</div>
+</div>
+<div id="revisionPage" class="page hidden">
+<div class="card">
+<h2 id="revisionTitle">Chapter Revision</h2>
+<p id="revisionProgress">Question 1 of 30</p>
+<div id="revisionQuestion" style="font-size:22px; margin:25px 0; font-weight:bold;">Question Here</div>
+<input type="text" id="revisionAnswer" placeholder="Write your answer here">
+<button onclick="checkRevisionAnswer()">Submit Answer</button>
+<div id="revisionResult" style="margin-top:20px;"></div>
+<button id="revisionNextBtn" style="display:none;" onclick="nextRevisionQuestion()">Next Question →</button>
+<div class="progressBar">
+<div id="revisionProgressFill" class="progressFill"></div>
+</div>
+</div>
+</div>
+<div id="weekly" class="page hidden">
+<h2>📝 Weekly Test</h2>
+<div class="card" style="text-align: center;">
+<h3>🌟 Mega Weekly Test</h3>
+<p style="margin-bottom: 20px;">This test contains 10 random questions combined from all the subjects.</p>
+<button onclick="startWeeklyTest()" style="background: #e91e63;">Start Weekly Test</button>
+</div>
+</div>
+<div id="asksh" class="page hidden">
+<div class="card">
+<h2>🤖 Ask SH</h2>
+<input type="text" id="askInput" placeholder="Ask your question">
+<button onclick="askSH()">Ask</button>
+<div id="askResult" style="margin-top:20px;"></div>
+</div>
+</div>
+<div id="profile" class="page hidden">
+<div class="card">
+<h2>👤 Student Profile</h2>
+<p>SH Score: <b id="profileScore">0</b></p><br>
+<p>Completed Chapters: <b id="profileChapters">0</b></p><br>
+<p>Rank: <b id="profileRank">Beginner</b></p>
+</div>
+</div>
+<footer>🚀 Student Hub V5</footer>
+<script>
+const motivations = [
+"Success starts with one step.",
+"Never stop learning.",
+"Practice makes progress.",
+"Dream big and work hard."
+];
+
+const quizzes = {
+selfintro: [
+{q:"What is your name?",a:"my name is"},{q:"How old are you?",a:"i am"},{q:"Where do you live?",a:"i live in"},{q:"Which class do you study in?",a:"i study in"},{q:"What is your favourite subject?",a:"my favourite subject is"},
+{q:"What is your school name?",a:"my school name is"},{q:"Who is your best friend?",a:"my best friend is"},{q:"What is your hobby?",a:"my hobby is"},{q:"What do you want to become?",a:"i want to become"},{q:"Where are you from?",a:"i am from"},
+{q:"What is your father name?",a:"my father name is"},{q:"What is your mother name?",a:"my mother name is"},{q:"Do you like English?",a:"yes i do"},{q:"Do you play games?",a:"yes i play"},{q:"What is your dream?",a:"my dream is"},
+{q:"What do you like most?",a:"i like"},{q:"What is your village name?",a:"my village name is"},{q:"What is your city name?",a:"my city name is"},{q:"Are you a student?",a:"yes i am"},{q:"Do you study daily?",a:"yes i study"},
+{q:"What time do you wake up?",a:"i wake up at"},{q:"What time do you sleep?",a:"i sleep at"},{q:"Do you go to school?",a:"yes i go"},{q:"What is your age?",a:"i am"},{q:"What is your nationality?",a:"i am indian"},
+{q:"Do you like sports?",a:"yes i like"},{q:"What is your favourite color?",a:"my favourite color is"},{q:"What is your phone name?",a:"my phone is"},{q:"Do you help your parents?",a:"yes i help"},{q:"What is your aim?",a:"my aim is"}
+],
+daily: [
+{q:"How are you?",a:"i am fine"},{q:"What are you doing?",a:"i am"},{q:"Where are you going?",a:"i am going"},{q:"What do you eat?",a:"i eat"},{q:"When do you wake up?",a:"i wake up"},
+{q:"What time is it?",a:"it is"},{q:"Where do you study?",a:"i study in"},{q:"What are you reading?",a:"i am reading"},{q:"Are you busy?",a:"yes i am"},{q:"Do you understand?",a:"yes i understand"},
+{q:"Is it raining?",a:"no it is not"},{q:"Do you want water?",a:"yes i want"},{q:"Where is your bag?",a:"here it is"},{q:"Are you tired?",a:"no i am not"},{q:"Do you like tea?",a:"yes i do"},
+{q:"Can you run?",a:"yes i can"},{q:"Who is there?",a:"it is me"},{q:"Come inside?",a:"thank you"},{q:"Sit down?",a:"okay"},{q:"Speak loudly?",a:"yes i will"},
+{q:"Where are you?",a:"i am here"},{q:"Open the door?",a:"yes i am opening"},{q:"Close the window?",a:"done"},{q:"Are you happy?",a:"yes i am"},{q:"Do you know me?",a:"yes i know"},
+{q:"Call him?",a:"ok"},{q:"Wait for me?",a:"sure"},{q:"Let us go?",a:"yes let us go"},{q:"Don't do this?",a:"sorry"},{q:"Listen to me?",a:"i am listening"}
+],
+greetings: [
+{q:"Morning greeting?",a:"good morning"},{q:"Evening greeting?",a:"good evening"},{q:"Night greeting?",a:"good night"},{q:"Thank someone?",a:"thank you"},{q:"Say sorry?",a:"sorry"},
+{q:"Welcome someone?",a:"welcome"},{q:"Ask how are you?",a:"how are you"},{q:"Reply fine?",a:"i am fine"},{q:"Say bye?",a:"goodbye"},{q:"Meet someone?",a:"nice to meet you"},
+{q:"Wish birthday?",a:"happy birthday"},{q:"Wish success?",a:"best of luck"},{q:"Say hello?",a:"hello"},{q:"Say please?",a:"please"},{q:"Say congratulations?",a:"congratulations"},
+{q:"Say see you soon?",a:"see you soon"},{q:"Say take care?",a:"take care"},{q:"Have a nice day?",a:"thank you"},{q:"Say excuse me?",a:"excuse me"},{q:"Welcome back?",a:"thank you"},
+{q:"Good afternoon?",a:"good afternoon"},{q:"Hi there?",a:"hello"},{q:"Glad to meet you?",a:"same here"},{q:"Thank you so much?",a:"you are welcome"},{q:"Pleased to meet you?",a:"pleased to meet you too"},
+{q:"Have a safe journey?",a:"thank you"},{q:"Happy anniversary?",a:"thank you"},{q:"Good luck to you?",a:"thanks"},{q:"See you later?",a:"bye"},{q:"Take it easy?",a:"sure"}
+],
+vocab: [
+{q:"Meaning of apple?",a:"fruit"},{q:"Meaning of book?",a:"reading material"},{q:"Meaning of pen?",a:"writing tool"},{q:"Meaning of school?",a:"education place"},{q:"Meaning of teacher?",a:"educator"},
+{q:"Meaning of student?",a:"learner"},{q:"Meaning of water?",a:"liquid"},{q:"Meaning of sun?",a:"star"},{q:"Meaning of moon?",a:"satellite"},{q:"Meaning of earth?",a:"planet"},
+{q:"Meaning of car?",a:"vehicle"},{q:"Meaning of road?",a:"path"},{q:"Meaning of house?",a:"home"},{q:"Meaning of food?",a:"eatable"},{q:"Meaning of milk?",a:"drink"},
+{q:"Meaning of dog?",a:"animal"},{q:"Meaning of cat?",a:"animal"},{q:"Meaning of sky?",a:"above air"},{q:"Meaning of tree?",a:"plant"},{q:"Meaning of flower?",a:"plant part"},
+{q:"Meaning of run?",a:"move fast"},{q:"Meaning of walk?",a:"move slowly"},{q:"Meaning of eat?",a:"consume food"},{q:"Meaning of sleep?",a:"rest"},{q:"Meaning of jump?",a:"spring from ground"},
+{q:"Meaning of happy?",a:"joyful"},{q:"Meaning of sad?",a:"unhappy"},{q:"Meaning of big?",a:"large"},{q:"Meaning of small?",a:"tiny"},{q:"Meaning of hot?",a:"high temperature"}
+],
+grammar: [
+{q:"What is noun?",a:"name of person place thing"},{q:"What is verb?",a:"action word"},{q:"What is adjective?",a:"describing word"},{q:"What is pronoun?",a:"replaces noun"},{q:"What is tense?",a:"time of action"},
+{q:"Present tense means?",a:"now"},{q:"Past tense means?",a:"before"},{q:"Future tense means?",a:"after"},{q:"He, She, It are?",a:"pronouns"},{q:"I, We are?",a:"pronouns"},
+{q:"What is full stop?",a:"end sentence"},{q:"What is singular?",a:"one"},{q:"What is plural?",a:"more than one"},{q:"Antonym of hot?",a:"cold"},{q:"Synonym of big?",a:"large"},
+{q:"A, An, The are?",a:"articles"},{q:"Is 'running' a verb?",a:"yes"},{q:"Is 'beautiful' a noun?",a:"no"},{q:"Plural of cat?",a:"cats"},{q:"Plural of man?",a:"men"},
+{q:"Past tense of go?",a:"went"},{q:"Past tense of eat?",a:"ate"},{q:"Future marker word?",a:"will"},{q:"What is a sentence?",a:"group of words"},{q:"Is 'and' a conjunction?",a:"yes"},
+{q:"Opposite of day?",a:"night"},{q:"Opposite of good?",a:"bad"},{q:"Femine of king?",a:"queen"},{q:"Plural of box?",a:"boxes"},{q:"First letter of sentence is?",a:"capital"}
+],
+math10ch1:[
+{q:"What is a real number?",a:"number"},{q:"What is a rational number?",a:"p by q"},{q:"What is an irrational number?",a:"non terminating"},{q:"What is HCF?",a:"highest common factor"},{q:"What is LCM?",a:"least common multiple"},
+{q:"Pi is?",a:"irrational number"},{q:"Value of root 4?",a:"2"},{q:"Smallest prime number?",a:"2"},{q:"Is 0 rational?",a:"yes"},{q:"Is root 2 rational?",a:"no"},
+{q:"Smallest composite number?",a:"4"},{q:"HCF of co-prime numbers is?",a:"1"},{q:"Product of two numbers equals HCF cross?",a:"lcm"},{q:"Is 1 prime?",a:"no"},{q:"Every integer is rational?",a:"yes"},
+{q:"Can denominator q be 0?",a:"no"},{q:"Decimal form of 1/2?",a:"0.5"},{q:"Terminating decimals are?",a:"rational"},{q:"Non-terminating non-repeating are?",a:"irrational"},{q:"Is -5 an integer?",a:"yes"},
+{q:"Is 3.14 rational?",a:"yes"},{q:"Square of an even number is?",a:"even"},{q:"Square of an odd number is?",a:"odd"},{q:"Is root 9 rational?",a:"yes"},{q:"HCF of 2 and 4?",a:"2"},
+{q:"LCM of 2 and 3?",a:"6"},{q:"Are natural numbers whole numbers?",a:"yes"},{q:"Are whole numbers natural numbers?",a:"no"},{q:"What is Euclid lemma for?",a:"hcf"},{q:"Is 11 prime?",a:"yes"}
+],
+math10ch2:[
+{q:"What is a polynomial?",a:"expression"},{q:"Degree of quadratic polynomial?",a:"2"},{q:"Linear polynomial degree?",a:"1"},{q:"Cubic polynomial degree?",a:"3"},{q:"What is zero of polynomial?",a:"value of x"},
+{q:"Number of zeroes of linear polynomial?",a:"1"},{q:"Number of zeroes of quadratic polynomial?",a:"2"},{q:"Degree of constant polynomial?",a:"0"},{q:"Is x+1 linear?",a:"yes"},{q:"Is x^2 quadratic?",a:"yes"},
+{q:"Highest power is called?",a:"degree"},{q:"Polynomial with 1 term?",a:"monomial"},{q:"Polynomial with 2 terms?",a:"binomial"},{q:"Polynomial with 3 terms?",a:"trinomial"},{q:"Value making p(x)=0 is?",a:"zero"},
+{q:"Graph of quadratic is?",a:"parabola"},{q:"Graph of linear is?",a:"straight line"},{q:"Zero of x-5 is?",a:"5"},{q:"Zero of 2x-4 is?",a:"2"},{q:"Sum of roots formula?",a:"minus b by a"},
+{q:"Product of roots formula?",a:"c by a"},{q:"Is root(x) a polynomial?",a:"no"},{q:"Is 5 a polynomial?",a:"yes"},{q:"Coefficient of x in 3x+2?",a:"3"},{q:"Constant in x^2+5?",a:"5"},
+{q:"Degree of x^5+1?",a:"5"},{q:"Zeroes of x^2-4?",a:"2 and -2"},{q:"Can a cubic have 4 zeroes?",a:"no"},{q:"Formula for discriminant?",a:"b^2-4ac"},{q:"If discriminant is 0, roots are?",a:"equal"}
+],
+physics10ch1:[
+{q:"What is light?",a:"form of energy"},{q:"What is reflection?",a:"bouncing back"},{q:"What is refraction?",a:"bending of light"},{q:"Light travels in?",a:"straight line"},{q:"Convex lens is?",a:"converging lens"},
+{q:"Concave lens is?",a:"diverging lens"},{q:"Plane mirror forms?",a:"virtual image"},{q:"Speed of light in vacuum?",a:"3x10^8 m/s"},{q:"Unit of power of lens?",a:"dioptre"},{q:"Focal length is half of?",a:"radius of curvature"},
+{q:"Mirror formula?",a:"1/v + 1/u = 1/f"},{q:"Lens formula?",a:"1/v - 1/u = 1/f"},{q:"Magnification of plane mirror?",a:"1"},{q:"Law of reflection says angle i equals?",a:"angle r"},{q:"Bending of light in prism is?",a:"dispersion"},
+{q:"Splitting of light into 7 colors?",a:"dispersion"},{q:"Color that bends least?",a:"red"},{q:"Color that bends most?",a:"violet"},{q:"Rear view mirror is?",a:"convex"},{q:"Dentist uses which mirror?",a:"concave"},
+{q:"Image on screen is always?",a:"real"},{q:"Virtual images are always?",a:"erect"},{q:"Real images are always?",a:"inverted"},{q:"Refractive index of vacuum?",a:"1"},{q:"Does light need a medium?",a:"no"},
+{q:"Power of convex lens is?",a:"positive"},{q:"Power of concave lens is?",a:"negative"},{q:"Focal length of plane mirror?",a:"infinity"},{q:"Twinkling of stars is due to?",a:"atmospheric refraction"},{q:"Danger signals are?",a:"red"}
+],
+physics10ch2:[
+{q:"What is electric current?",a:"flow of charge"},{q:"SI unit of current?",a:"ampere"},{q:"SI unit of resistance?",a:"ohm"},{q:"Instrument for current?",a:"ammeter"},{q:"Instrument for voltage?",a:"voltmeter"},
+{q:"Unit of voltage?",a:"volt"},{q:"Unit of charge?",a:"coulomb"},{q:"Resistance opposes?",a:"current"},{q:"Conductor allows?",a:"current"},{q:"Insulator blocks?",a:"current"},
+{q:"Ohm's Law formula?",a:"v = ir"},{q:"Commercial unit of energy?",a:"kwh"},{q:"Device to protect circuit?",a:"fuse"},{q:"Charge on electron?",a:"negative"},{q:"Resistivity depends on?",a:"material"},
+{q:"If length doubles, resistance?",a:"doubles"},{q:"If area doubles, resistance?",a:"halves"},{q:"In series, current remains?",a:"same"},{q:"In parallel, voltage remains?",a:"same"},{q:"Filament of bulb is made of?",a:"tungsten"},
+{q:"Heating effect formula?",a:"i^2rt"},{q:"Unit of electric power?",a:"watt"},{q:"Is copper a conductor?",a:"yes"},{q:"Is plastic a conductor?",a:"no"},{q:"Device to change resistance?",a:"rheostat"},
+{q:"Ammeter is connected in?",a:"series"},{q:"Voltmeter is connected in?",a:"parallel"},{q:"Resistance of ideal ammeter?",a:"zero"},{q:"Resistance of ideal voltmeter?",a:"infinity"},{q:"Generator converts mechanical into?",a:"electrical"}
+],
+chem10ch1:[
+{q:"What is matter?",a:"mass and space"},{q:"States of matter?",a:"solid liquid gas"},{q:"Evaporation is?",a:"liquid to gas"},{q:"Condensation is?",a:"gas to liquid"},{q:"Melting is?",a:"solid to liquid"},
+{q:"Reaction releasing heat?",a:"exothermic"},{q:"Reaction absorbing heat?",a:"endothermic"},{q:"Law of conservation says mass is?",a:"conserved"},{q:"Rusting of iron is?",a:"oxidation"},{q:"Adding oxygen is?",a:"oxidation"},
+{q:"Removing oxygen is?",a:"reduction"},{q:"Both oxidation and reduction?",a:"redox"},{q:"Formula of rust?",a:"fe2o3"},{q:"Gas filled in chips pack?",a:"nitrogen"},{q:"Color of copper sulphate solution?",a:"blue"},
+{q:"Burning of magnesium ribbon gives?",a:"white powder"},{q:"Formula of water?",a:"h2o"},{q:"Formula of carbon dioxide?",a:"co2"},{q:"Unbalanced equation is?",a:"skeletal"},{q:"Symbol for solid?",a:"s"},
+{q:"Symbol for aqueous?",a:"aq"},{q:"Reaction where one displaces another?",a:"displacement"},{q:"Reaction where two clear solutions form solid?",a:"precipitation"},{q:"Insoluble solid formed is?",a:"precipitate"},{q:"Decomposition requires?",a:"energy"},
+{q:"Photosynthesis is endothermic?",a:"yes"},{q:"Respiration is exothermic?",a:"yes"},{q:"Browning of food is?",a:"rancidity"},{q:"To prevent rancidity we use?",a:"antioxidants"},{q:"Is burning paper chemical change?",a:"yes"}
+],
+chem10ch2:[
+{q:"What is pH of neutral solution?",a:"7"},{q:"Acids turn litmus?",a:"red"},{q:"Bases turn litmus?",a:"blue"},{q:"Acid taste?",a:"sour"},{q:"Base taste?",a:"bitter"},
+{q:"Acid releases which ion?",a:"h+"},{q:"Base releases which ion?",a:"oh-"},{q:"pH less than 7?",a:"acid"},{q:"pH more than 7?",a:"base"},{q:"Formula of hydrochloric acid?",a:"hcl"},
+{q:"Formula of sodium hydroxide?",a:"naoh"},{q:"Acid + Base forms?",a:"salt and water"},{q:"This reaction is called?",a:"neutralization"},{q:"Acid in tomato?",a:"oxalic acid"},{q:"Acid in curd?",a:"lactic acid"},
+{q:"Acid in vinegar?",a:"acetic acid"},{q:"Acid in lemon?",a:"citric acid"},{q:"Our stomach produces?",a:"hcl"},{q:"pH of rain water less than 5.6?",a:"acid rain"},{q:"Tooth decay starts below pH?",a:"5.5"},
+{q:"Formula of washing soda?",a:"na2co3"},{q:"Formula of baking soda?",a:"nahco3"},{q:"Chemical name of bleaching powder?",a:"calcium oxychloride"},{q:"Plaster of Paris formula?",a:"caso4.1/2h2o"},{q:"Gypsum formula?",a:"caso4.2h2o"},
+{q:"Litmus is extracted from?",a:"lichen"},{q:"Is water neutral?",a:"yes"},{q:"Antacid example?",a:"milk of magnesia"},{q:"Baking soda taste?",a:"bitter"},{q:"What gas turns lime water milky?",a:"co2"}
+],
+bio10ch1:[
+{q:"Basic unit of life?",a:"cell"},{q:"Who discovered cell?",a:"robert hooke"},{q:"Powerhouse of cell?",a:"mitochondria"},{q:"Control centre?",a:"nucleus"},{q:"Green pigment in plants?",a:"chlorophyll"},
+{q:"Process of food making in plants?",a:"photosynthesis"},{q:"Organ for breathing in humans?",a:"lungs"},{q:"Fish breathe through?",a:"gills"},{q:"Pumping organ?",a:"heart"},{q:"Vessel carrying pure blood?",a:"artery"},
+{q:"Vessel carrying impure blood?",a:"vein"},{q:"Amoeba takes food by?",a:"pseudopodia"},{q:"Where does digestion start?",a:"mouth"},{q:"Complete digestion happens in?",a:"small intestine"},{q:"Acid in stomach?",a:"hcl"},
+{q:"Bile is secreted by?",a:"liver"},{q:"Bile is stored in?",a:"gall bladder"},{q:"Phloem transports?",a:"food"},{q:"Xylem transports?",a:"water"},{q:"Functional unit of kidney?",a:"nephron"},
+{q:"Excretory organ?",a:"kidney"},{q:"Blood cells carrying oxygen?",a:"rbc"},{q:"Blood cells fighting disease?",a:"wbc"},{q:"Cells helping in clotting?",a:"platelets"},{q:"Instrument for blood pressure?",a:"sphygmomanometer"},
+{q:"Normal blood pressure?",a:"120/80"},{q:"Stomata helps in?",a:"gas exchange"},{q:"Loss of water from leaves?",a:"transpiration"},{q:"Energy currency of cell?",a:"atp"},{q:"Breakdown of glucose in absence of oxygen?",a:"anaerobic"}
+],
+bio10ch2:[
+{q:"Unit of nervous system?",a:"neuron"},{q:"Reflex action controlled by?",a:"spinal cord"},{q:"Main thinking part of brain?",a:"forebrain"},{q:"Plant growth hormone?",a:"auxin"},{q:"Thyroid secretes?",a:"thyroxine"},
+{q:"Master gland?",a:"pituitary"},{q:"Emergency hormone?",a:"adrenaline"},{q:"Pancreas secretes?",a:"insulin"},{q:"Iodine deficiency causes?",a:"goitre"},{q:"Gap between two neurons?",a:"synapse"},
+{q:"Part of brain controlling posture?",a:"cerebellum"},{q:"Involuntary actions controlled by?",a:"medulla"},{q:"How many pairs of cranial nerves?",a:"12"},{q:"Growth inhibitor hormone in plants?",a:"abscisic acid"},{q:"Hormone ripening fruits?",a:"ethylene"},
+{q:"Male sex hormone?",a:"testosterone"},{q:"Female sex hormone?",a:"estrogen"},{q:"Deficiency of insulin causes?",a:"diabetes"},{q:"Gland near heart?",a:"thymus"},{q:"Response to gravity is?",a:"geotropism"},
+{q:"Response to light is?",a:"phototropism"},{q:"Response to water is?",a:"hydrotropism"},{q:"Response to chemicals is?",a:"chemotropism"},{q:"CNS consists of brain and?",a:"spinal cord"},{q:"Structural cover of brain?",a:"cranium"},
+{q:"Fluid protecting brain?",a:"csf"},{q:"Blinking of eye is?",a:"reflex action"},{q:"Which gland is both exocrine and endocrine?",a:"pancreas"},{q:"Hormone raising blood sugar?",a:"glucagon"},{q:"Fight or flight organ?",a:"adrenal"}
+],
+math12ch1:[
+{q:"What is a relation?",a:"ordered pairs"},{q:"What is a function?",a:"special relation"},{q:"Set of inputs?",a:"domain"},{q:"Set of outputs?",a:"range"},{q:"Possible outputs set?",a:"codomain"},
+{q:"A relation reflexive, symmetric, transitive is?",a:"equivalence"},{q:"If f(x)=f(y) implies x=y, function is?",a:"one one"},{q:"If range equals codomain, function is?",a:"onto"},{q:"Function both one-one and onto?",a:"bijection"},{q:"Identity function formula?",a:"f(x)=x"},
+{q:"Empty set cardinality?",a:"0"},{q:"Composition of f and g?",a:"fog"},{q:"Is fog always equal to gof?",a:"no"},{q:"Number of elements in set is?",a:"cardinality"},{q:"Subset of cross product is?",a:"relation"},
+{q:"Inverse of bijection exists?",a:"yes"},{q:"f(x)=c is?",a:"constant function"},{q:"Domain of sin x?",a:"real numbers"},{q:"Range of sin x?",a:"-1 to 1"},{q:"Strictly increasing function derivative?",a:"positive"},
+{q:"Can a function have two outputs for one input?",a:"no"},{q:"Relation where every element relates to itself?",a:"reflexive"},{q:"If aRb implies bRa, it is?",a:"symmetric"},{q:"If aRb and bRc implies aRc, it is?",a:"transitive"},{q:"Set with no elements?",a:"null set"},
+{q:"Universal relation contains?",a:"all pairs"},{q:"Intersection of set A and empty set?",a:"empty set"},{q:"Union of A and empty set?",a:"a"},{q:"f(-x) = f(x) means?",a:"even function"},{q:"f(-x) = -f(x) means?",a:"odd function"}
+],
+math12ch2:[
+{q:"Horizontal arrangement in matrix?",a:"row"},{q:"Vertical arrangement in matrix?",a:"column"},{q:"Matrix with equal rows and columns?",a:"square matrix"},{q:"Matrix with all zeroes?",a:"null matrix"},{q:"Diagonal matrix with 1s?",a:"identity matrix"},
+{q:"Interchanging rows and columns gives?",a:"transpose"},{q:"If A equals A transpose?",a:"symmetric"},{q:"If A transpose equals -A?",a:"skew symmetric"},{q:"Can we add different order matrices?",a:"no"},{q:"Determinant of identity matrix?",a:"1"},
+{q:"Order of 2x3 matrix has how many elements?",a:"6"},{q:"If determinant is 0, matrix is?",a:"singular"},{q:"Inverse exists only for?",a:"non singular"},{q:"Formula for A inverse?",a:"adj a by det a"},{q:"Determinant of AB equals det A cross?",a:"det b"},
+{q:"Transpose of AB equals B transpose cross?",a:"a transpose"},{q:"Matrix multiplication is commutative?",a:"no"},{q:"Matrix addition is commutative?",a:"yes"},{q:"Is identity matrix scalar?",a:"yes"},{q:"Element at 1st row 2nd col is?",a:"a12"},
+{q:"A square matrix has order n cross?",a:"n"},{q:"Inverse of identity matrix is?",a:"identity matrix"},{q:"Determinant is defined only for?",a:"square matrix"},{q:"Value of 1x1 matrix determinant?",a:"element itself"},{q:"If two rows are identical, determinant is?",a:"0"},
+{q:"Multiplying a row by k multiplies determinant by?",a:"k"},{q:"Diagonal elements of skew symmetric are?",a:"0"},{q:"Trace of matrix is sum of?",a:"diagonal elements"},{q:"Adjoint of symmetric matrix is?",a:"symmetric"},{q:"Is matrix algebra useful in computer graphics?",a:"yes"}
+],
+physics12ch1:[
+{q:"What is electric charge?",a:"property of matter"},{q:"Unit of charge?",a:"coulomb"},{q:"Like charges?",a:"repel"},{q:"Unlike charges?",a:"attract"},{q:"Region around charge?",a:"electric field"},
+{q:"Unit of electric field?",a:"newton per coulomb"},{q:"Charge on electron?",a:"1.6x10^-19 c"},{q:"Is charge quantized?",a:"yes"},{q:"Formula for quantisation?",a:"q=ne"},{q:"Is charge conserved?",a:"yes"},
+{q:"Coulomb's law force formula?",a:"k q1 q2 / r^2"},{q:"Value of k in vacuum?",a:"9x10^9"},{q:"Permittivity of free space symbol?",a:"epsilon zero"},{q:"Electric field lines emerge from?",a:"positive"},{q:"Electric field lines terminate at?",a:"negative"},
+{q:"Can two field lines cross?",a:"no"},{q:"Electric flux unit?",a:"n m^2 / c"},{q:"Gauss's law formula?",a:"q / epsilon zero"},{q:"Flux through closed surface depends on?",a:"enclosed charge"},{q:"Electric dipole consists of?",a:"two equal and opposite charges"},
+{q:"Dipole moment direction?",a:"negative to positive"},{q:"Unit of dipole moment?",a:"coulomb metre"},{q:"Torque on dipole?",a:"p e sin theta"},{q:"Field on axial line of dipole varies as?",a:"1/r^3"},{q:"Field on equatorial line varies as?",a:"1/r^3"},
+{q:"Field due to infinite straight wire?",a:"lambda / 2 pi epsilon r"},{q:"Field inside thin spherical shell?",a:"zero"},{q:"Is electric force conservative?",a:"yes"},{q:"Device to detect static charge?",a:"electroscope"},{q:"SI unit of permittivity?",a:"c^2 / n m^2"}
+],
+physics12ch2:[
+{q:"Unit of electric potential?",a:"volt"},{q:"Is potential scalar or vector?",a:"scalar"},{q:"Surface with equal potential?",a:"equipotential"},{q:"Device to store charge?",a:"capacitor"},{q:"Unit of capacitance?",a:"farad"},
+{q:"Dielectric insertion makes capacitance?",a:"increase"},{q:"Work done on equipotential surface?",a:"zero"},{q:"Potential energy formula?",a:"k q1 q2 / r"},{q:"Field inside conductor?",a:"zero"},{q:"Capacitors in parallel have same?",a:"potential"},
+{q:"Capacitors in series have same?",a:"charge"},{q:"Formula for parallel capacitance?",a:"c1 + c2"},{q:"Formula for series capacitance?",a:"1/c1 + 1/c2"},{q:"Energy stored in capacitor?",a:"1/2 cv^2"},{q:"Potential due to point charge varies as?",a:"1/r"},
+{q:"Potential due to dipole varies as?",a:"1/r^2"},{q:"Dimension of potential is work divided by?",a:"charge"},{q:"Dielectric constant of water?",a:"80"},{q:"Dielectric constant of vacuum?",a:"1"},{q:"Can a conductor have field lines inside?",a:"no"},
+{q:"Potential on surface of charged shell is?",a:"constant"},{q:"Potential at infinity is taken as?",a:"zero"},{q:"Relation between E and V?",a:"e = -dv/dr"},{q:"Capacity of spherical conductor?",a:"4 pi epsilon r"},{q:"Polar molecules have permanent?",a:"dipole moment"},
+{q:"Non-polar molecules have zero?",a:"dipole moment"},{q:"Earth's potential is taken as?",a:"zero"},{q:"Van de Graaff generator produces high?",a:"voltage"},{q:"Sharing charges loses energy as?",a:"heat"},{q:"Capacitance depends on shape?",a:"yes"}
+],
+chem12ch1:[
+{q:"What is solution?",a:"homogeneous mixture"},{q:"Substance dissolved?",a:"solute"},{q:"Dissolving medium?",a:"solvent"},{q:"Unit of molarity?",a:"mole per litre"},{q:"Water is?",a:"universal solvent"},
+{q:"Brass is solution of?",a:"zinc and copper"},{q:"ppm stands for?",a:"parts per million"},{q:"Unit of molality?",a:"mole per kg"},{q:"Mole fraction sum is always?",a:"1"},{q:"Solution holding max solute?",a:"saturated"},
+{q:"Henry's law relates solubility and?",a:"pressure"},{q:"Raoult's law is for?",a:"vapour pressure"},{q:"Properties depending on particle numbers?",a:"colligative"},{q:"Relative lowering of?",a:"vapour pressure"},{q:"Elevation of?",a:"boiling point"},
+{q:"Depression of?",a:"freezing point"},{q:"Movement of solvent through membrane?",a:"osmosis"},{q:"Pressure stopping osmosis?",a:"osmotic pressure"},{q:"Ideal solutions obey?",a:"Raoult's law"},{q:"Example of ideal solution?",a:"benzene and toluene"},
+{q:"Non-ideal solutions show?",a:"deviations"},{q:"Azeotropes are constant boiling?",a:"mixtures"},{q:"Van't Hoff factor for dissociation is?",a:"greater than 1"},{q:"Van't Hoff factor for association is?",a:"less than 1"},{q:"Purification of sea water by?",a:"reverse osmosis"},
+{q:"Does molarity change with temperature?",a:"yes"},{q:"Does molality change with temperature?",a:"no"},{q:"Solubility of gas decreases with?",a:"temperature"},{q:"Soda bottle contains gas?",a:"co2"},{q:"Blood cells shrink in saline because of?",a:"osmosis"}
+],
+chem12ch2:[
+{q:"Water formula?",a:"h2o"},{q:"Common salt formula?",a:"nacl"},{q:"Ammonia formula?",a:"nh3"},{q:"Hydrochloric acid?",a:"hcl"},{q:"Sulphuric acid?",a:"h2so4"},
+{q:"Nitric acid?",a:"hno3"},{q:"Carbon dioxide?",a:"co2"},{q:"Methane?",a:"ch4"},{q:"Sodium hydroxide?",a:"naoh"},{q:"Calcium carbonate?",a:"caco3"},
+{q:"Ethanol formula?",a:"c2h5oh"},{q:"Glucose formula?",a:"c6h12o6"},{q:"Ozone?",a:"o3"},{q:"Hydrogen peroxide?",a:"h2o2"},{q:"Sulfur dioxide?",a:"so2"},
+{q:"Benzene?",a:"c6h6"},{q:"Acetic acid?",a:"ch3cooh"},{q:"Formaldehyde?",a:"ch2o"},{q:"Acetone?",a:"ch3coch3"},{q:"Chloroform?",a:"chcl3"},
+{q:"Methanol?",a:"ch3oh"},{q:"Phenol?",a:"c6h5oh"},{q:"Silver nitrate?",a:"agno3"},{q:"Copper sulphate?",a:"cuso4"},{q:"Potassium permanganate?",a:"kmno4"},
+{q:"Baking soda?",a:"nahco3"},{q:"Washing soda?",a:"na2co3"},{q:"Bleaching powder?",a:"caocl2"},{q:"Ammonium chloride?",a:"nh4cl"},{q:"Ether formula?",a:"ch3och3"}
+],
+bio12ch1:[
+{q:"What is reproduction?",a:"producing offspring"},{q:"What is DNA?",a:"genetic material"},{q:"Unit of heredity?",a:"gene"},{q:"Male gamete?",a:"sperm"},{q:"Female gamete?",a:"ovum"},
+{q:"Fusion of gametes?",a:"fertilisation"},{q:"Fertilised egg?",a:"zygote"},{q:"Zygote develops into?",a:"embryo"},{q:"Asexual needs how many parents?",a:"1"},{q:"Sexual needs how many parents?",a:"2"},
+{q:"Division for gametes?",a:"meiosis"},{q:"Division for growth?",a:"mitosis"},{q:"Passing traits to offspring?",a:"heredity"},{q:"DNA package?",a:"chromosome"},{q:"Change in DNA?",a:"mutation"},
+{q:"Observable traits?",a:"phenotype"},{q:"Genetic makeup?",a:"genotype"},{q:"Variant of gene?",a:"allele"},{q:"Trait masking another?",a:"dominant"},{q:"Trait being masked?",a:"recessive"},
+{q:"Asexual units in amoeba?",a:"binary fission"},{q:"Budding example?",a:"yeast"},{q:"Offspring of asexual are?",a:"clones"},{q:"Are clones genetically identical?",a:"yes"},{q:"External fertilisation happens in?",a:"frog"},
+{q:"Internal fertilisation happens in?",a:"human"},{q:"Period from birth to natural death?",a:"life span"},{q:"Is any organism immortal?",a:"no except unicellular"},{q:"Male organ in flower?",a:"stamen"},{q:"Female organ in flower?",a:"pistil"}
+],
+bio12ch2:[
+{q:"Cell is?",a:"basic unit of life"},{q:"DNA stands for?",a:"deoxyribonucleic acid"},{q:"RNA stands for?",a:"ribonucleic acid"},{q:"Powerhouse?",a:"mitochondria"},{q:"Control centre?",a:"nucleus"},
+{q:"Ribosomes make?",a:"proteins"},{q:"Plant cell has cell wall?",a:"yes"},{q:"Animal cell has cell wall?",a:"no"},{q:"Genes are made of?",a:"dna"},{q:"Organisms have cells?",a:"yes"},
+{q:"Copying DNA to RNA?",a:"transcription"},{q:"Making protein from RNA?",a:"translation"},{q:"Copying DNA?",a:"replication"},{q:"Three base sequence?",a:"codon"},{q:"tRNA complement?",a:"anticodon"},
+{q:"One base changed is?",a:"substitution"},{q:"Circular DNA in bacteria?",a:"plasmid"},{q:"Process producing protein?",a:"gene expression"},{q:"DNA structure is?",a:"double helix"},{q:"Who proposed double helix?",a:"watson and crick"},
+{q:"Purines are adenine and?",a:"guanine"},{q:"Pyrimidines in DNA are cytosine and?",a:"thymine"},{q:"In RNA thymine is replaced by?",a:"uracil"},{q:"Sugar in DNA?",a:"deoxyribose"},{q:"Sugar in RNA?",a:"ribose"},
+{q:"Bond between nitrogen bases?",a:"hydrogen bond"},{q:"Adenine pairs with?",a:"thymine"},{q:"Guanine pairs with?",a:"cytosine"},{q:"Initiation codon is?",a:"aug"},{q:"Stop codon example?",a:"uaa"},{q:"Enzyme for replication?",a:"dna polymerase"}
+]
+};
+/* REVISION VARIABLES */
+let currentQuiz = "";
+let currentQuestion = 0;
+let score = 0;
+
+/* MOTIVATION FUNCTION */
+function newMotivation(){
+let random = Math.floor(Math.random() * motivations.length);
+document.getElementById("motivationText").innerText = motivations[random];
+}
+
+/* PAGE SYSTEM */
+function showPage(page){
+document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+document.getElementById(page).classList.remove("hidden");
+if(page==="profile"){
+loadProfile();
+}
+}
+
+/* OPEN REVISION (DIRECT ACCESS FOR ALL SECTIONS) */
+function openRevision(type){
+if(!quizzes[type] || quizzes[type].length === 0){
+alert("Questions are not added yet.");
+return;
+}
+currentQuiz = type;
+currentQuestion = 0;
+score = 0;
+showPage("revisionPage");
+document.getElementById("revisionTitle").innerText = type.toUpperCase();
+loadQuestion();
+}
+
+/* START WEEKLY TEST (10 RANDOM QUESTIONS FROM ALL CHAPTERS) */
+function startWeeklyTest() {
+    let allQuestions = [];
+    for (let key in quizzes) {
+        if (key !== 'weeklyTest') {
+            allQuestions = allQuestions.concat(quizzes[key]);
+        }
+    }
+    if (allQuestions.length === 0) {
+        alert("No questions available to generate test.");
+        return;
+    }
+    for (let i = allQuestions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+    }
+    let selected10 = allQuestions.slice(0, 10);
+    quizzes['weeklyTest'] = selected10.map(q => ({q: q.q, a: q.a}));
+    openRevision('weeklyTest');
+}
+
+/* LOAD QUESTION */
+function loadQuestion(){
+let q = quizzes[currentQuiz][currentQuestion];
+document.getElementById("revisionQuestion").innerText = q.q;
+document.getElementById("revisionAnswer").value = "";
+document.getElementById("revisionResult").innerHTML = "";
+document.getElementById("revisionNextBtn").style.display = "none";
+document.getElementById("revisionProgress").innerText =
+"Question " + (currentQuestion + 1) + " of " + quizzes[currentQuiz].length;
+let percent = (currentQuestion / quizzes[currentQuiz].length) * 100;
+document.getElementById("revisionProgressFill").style.width = percent + "%";
+}
+
+/* CHECK ANSWER LOGIC */
+function normalizeAnswer(text){
+return text.toLowerCase().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim();
+}
+
+function checkRevisionAnswer(){
+let userRaw = document.getElementById("revisionAnswer").value;
+let user = normalizeAnswer(userRaw);
+let correct = normalizeAnswer(quizzes[currentQuiz][currentQuestion].a);
+if(user.length > 0 && (user.includes(correct) || correct.includes(user))){
+score++;
+document.getElementById("revisionResult").innerHTML =
+"<span class='correct'>✅ Correct Answer</span>";
+}else{
+document.getElementById("revisionResult").innerHTML =
+"<span class='wrong'>❌ Correct Answer: " + quizzes[currentQuiz][currentQuestion].a + "</span>";
+}
+document.getElementById("revisionNextBtn").style.display = "inline-block";
+}
+
+/* NEXT QUESTION */
+function nextRevisionQuestion(){
+currentQuestion++;
+if(currentQuestion < quizzes[currentQuiz].length){
+loadQuestion();
+}else{
+saveScore();
+document.getElementById("revisionProgressFill").style.width = "100%";
+alert("Chapter Completed!\nScore: " + score + " / " + quizzes[currentQuiz].length);
+showPage("home");
+}
+}
+
+/* SCORE SYSTEM */
+function saveScore(){
+let total = Number(localStorage.getItem("shScore") || 0);
+total += score;
+localStorage.setItem("shScore", total);
+document.getElementById("shScore").innerText = total;
+let chapters = Number(localStorage.getItem("chaptersDone") || 0);
+chapters++;
+localStorage.setItem("chaptersDone", chapters);
+document.getElementById("chaptersDone").innerText = chapters;
+updateRank(total);
+}
+
+/* RANK SYSTEM */
+function updateRank(total){
+let rank = "Beginner";
+if(total >= 50){ rank = "Learner"; }
+if(total >= 100){ rank = "Advanced"; }
+if(total >= 200){ rank = "Top Student"; }
+document.getElementById("rank").innerText = rank;
+}
+
+/* PROFILE INTERFACE */
+function loadProfile(){
+document.getElementById("profileScore").innerText = localStorage.getItem("shScore") || 0;
+document.getElementById("profileChapters").innerText = localStorage.getItem("chaptersDone") || 0;
+document.getElementById("profileRank").innerText = document.getElementById("rank").innerText;
+}
+
+/* ASK SH SIMULATION */
+function askSH(){
+let question = document.getElementById("askInput").value;
+if(question===""){
+return;
+}
+document.getElementById("askResult").innerText =
+"SH AI received your question: " + question;
+}
+
+/* LOAD SAVED DATA ON STARTUP */
+window.onload = function(){
+let total = localStorage.getItem("shScore") || 0;
+let chapters = localStorage.getItem("chaptersDone") || 0;
+document.getElementById("shScore").innerText = total;
+document.getElementById("chaptersDone").innerText = chapters;
+updateRank(Number(total));
+showPage("home");
+};
+</script>
+</body>
+</html>
