@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Hub V6 - Enhanced</title>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #4f46e5;
+  --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --surface: #ffffff;
+  --background: #f8fafc;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --success: #10b981;
+  --error: #ef4444;
+  --radius: 16px;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* Header & Logo */
+header {
+  background: var(--primary-gradient);
+  color: white;
+  text-align: center;
+  padding: 30px 20px 25px;
+  border-radius: 0 0 24px 24px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.logo-img {
+  max-height: 65px;
+  max-width: 200px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px;
+}
+
+.logo-text {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+header p {
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Navigation */
+nav {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  position: sticky;
+  top: 10px;
+  z-index: 100;
+  margin: -20px 16px 20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+nav::-webkit-scrollbar {
+  display: none;
+}
+
+nav button {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+nav button.active, nav button:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* Layout */
+.page {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 0 16px;
+  min-height: 60vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Cards */
+.card {
+  background: var(--surface);
+  padding: 24px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.card h2, .card h3 {
+  color: var(--text-main);
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+.card button, .btn-primary {
+  width: 100%;
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.card button:hover, .btn-primary:hover {
+  opacity: 0.95;
+}
+
+.card button:active, .btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: #f1f5f9 !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border) !important;
+}
+
+input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  margin: 10px 0;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+input:focus {
+  border-color: var(--primary);
+}
+
+/* Hero Section */
+.hero {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 28px;
+  border-radius: var(--radius);
+  text-align: center;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+
+.hero h2 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+/* MCQ Option Buttons */
+.mcq-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.mcq-btn {
+  background: #f8fafc;
+  color: var(--text-main);
+  border: 2px solid var(--border);
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.mcq-btn:hover {
+  border-color: var(--primary);
+  background: #f1f5f9;
+}
+
+.mcq-btn.correct-opt {
+  background: #d1fae5 !important;
+  border-color: var(--success) !important;
+  color: #065f46 !important;
+}
+
+.mcq-btn.wrong-opt {
+  background: #fee2e2 !important;
+  border-color: var(--error) !important;
+  color: #991b1b !important;
+}
+
+/* Progress Bar */
+.progressBar {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.progressFill {
+  height: 100%;
+  width: 0%;
+  background: var(--primary-gradient);
+  transition: width 0.3s ease;
+}
+
+.correct {
+  color: var(--success);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.wrong {
+  color: var(--error);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.back-btn {
+  background: transparent;
+  color: var(--primary);
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 14px;
+}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VSKF4XWPNR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VSKF4XWPNR');
+</script>
+</head>
+<body>
+
+<header>
+  <div class="logo-container">
+    <!-- Updated Logo file name -->
+    <img src="WhatsApp Image 2026-08-02 at 1.08.18 PM.jpeg" alt="Student Hub Logo" class="logo-img" onerror="this.style.display='none'">
+    <div class="logo-text">🎓 SH</div>
+  </div>
+  <h1>Student Hub</h1>
+  <p>Learn • Practice • Improve • Succeed</p>
+</header>
+
+<nav>
+  <button class="nav-btn active" onclick="showPage('home', this)">🏠 Home</button>
+  <button class="nav-btn" onclick="showPage('english', this)">📚 English</button>
+  <button class="nav-btn" onclick="showPage('class10', this)">📘 Class 10</button>
+  <button class="nav-btn" onclick="showPage('class12', this)">📗 Class 12</button>
+  <button class="nav-btn" onclick="showPage('weekly', this)">📝 Test</button>
+  <button class="nav-btn" onclick="showPage('asksh', this)">🤖 Ask SH AI</button>
+  <button class="nav-btn" onclick="showPage('profile', this)">👤 Profile</button>
+</nav>
+
+<!-- Home Page -->
+<div id="home" class="page">
+  <div class="hero">
+    <h2>Welcome To Student Hub</h2>
+    <p>Your Smart Learning Partner</p>
+  </div>
+  <div class="card">
+    <h3>🔥 Daily Motivation</h3>
+    <p id="motivationText" style="color: var(--text-muted); font-size: 15px;">Success starts with one step.</p>
+    <button onclick="newMotivation()">New Motivation</button>
+  </div>
+  <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <h3 style="margin: 0;">🏆 SH Score</h3>
+      <p style="color: var(--text-muted); font-size: 13px;">Total Points Earned</p>
+    </div>
+    <h1 id="shScore" style="color: var(--primary); font-size: 36px;">0</h1>
+  </div>
+  <div class="card">
+    <h3>📊 Progress Overview</h3>
+    <p>Chapters Completed: <b id="chaptersDone">0</b></p>
+    <p style="margin-top: 6px;">Current Rank: <b id="rank" style="color: var(--primary);">Beginner</b></p>
+  </div>
+</div>
+
+<!-- English Page -->
+<div id="english" class="page hidden">
+  <h2>📚 English Learning</h2>
+  <div class="card">
+    <h3>🙋 Self Introduction</h3>
+    <button onclick="openRevision('selfintro')">Start Self Introduction</button>
+  </div>
+  <div class="card">
+    <h3>💬 Daily Use Sentences</h3>
+    <button onclick="openRevision('daily')">Start Daily Use Sentences</button>
+  </div>
+  <div class="card">
+    <h3>👋 Greetings</h3>
+    <button onclick="openRevision('greetings')">Start Greetings</button>
+  </div>
+  <div class="card">
+    <h3>📖 Vocabulary</h3>
+    <button onclick="openRevision('vocab')">Start Vocabulary</button>
+  </div>
+  <div class="card">
+    <h3>✍️ Grammar Basics (Short Answer Mode)</h3>
+    <button onclick="openRevision('grammar')">Start Grammar Basics</button>
+  </div>
+</div>
+
+<!-- Class 10 -->
+<div id="class10" class="page hidden">
+  <h2>📘 Class 10th Basic</h2>
+  <div class="card">
+    <button onclick="showPage('math10menu')">📐 Mathematics</button>
+    <button onclick="showPage('physics10menu')">⚡ Physics</button>
+    <button onclick="showPage('chem10menu')">🧪 Chemistry</button>
+    <button onclick="showPage('bio10menu')">🌿 Biology</button>
+  </div>
+</div>
+
+<!-- Submenus for Class 10 -->
+<div id="math10menu" class="page hidden">
+  <div class="card">
+    <h2>📐 Class 10 Mathematics</h2>
+    <button onclick="openRevision('math10ch1')">📖 Chapter 1 – Real Numbers</button>
+    <button onclick="openRevision('math10ch2')">📖 Chapter 2 – Polynomials</button>
+  </div>
+</div>
+<div id="physics10menu" class="page hidden">
+  <div class="card">
+    <h2>⚡ Class 10 Physics</h2>
+    <button onclick="openRevision('physics10ch1')">📖 Chapter 1 – Light</button>
+    <button onclick="openRevision('physics10ch2')">📖 Chapter 2 – Electricity</button>
+  </div>
+</div>
+<div id="chem10menu" class="page hidden">
+  <div class="card">
+    <h2>🧪 Class 10 Chemistry</h2>
+    <button onclick="openRevision('chem10ch1')">📖 Chapter 1 – Chemical Reactions</button>
+    <button onclick="openRevision('chem10ch2')">📖 Chapter 2 – Acids, Bases & Salts</button>
+  </div>
+</div>
+<div id="bio10menu" class="page hidden">
+  <div class="card">
+    <h2>🌿 Class 10 Biology</h2>
+    <button onclick="openRevision('bio10ch1')">📖 Chapter 1 – Life Processes</button>
+    <button onclick="openRevision('bio10ch2')">📖 Chapter 2 – Control & Coordination</button>
+  </div>
+</div>
+
+<!-- Class 12 -->
+<div id="class12" class="page hidden">
+  <h2>📗 Class 12th Basic</h2>
+  <div class="card">
+    <button onclick="showPage('math12menu')">📊 Mathematics</button>
+    <button onclick="showPage('physics12menu')">🔋 Physics</button>
+    <button onclick="showPage('chem12menu')">⚗️ Chemistry</button>
+    <button onclick="showPage('bio12menu')">🧬 Biology</button>
+  </div>
+</div>
+
+<!-- Submenus for Class 12 -->
+<div id="math12menu" class="page hidden">
+  <div class="card">
+    <h2>📊 Class 12 Mathematics</h2>
+    <button onclick="openRevision('math12ch1')">📖 Chapter 1 – Relations and Functions</button>
+    <button onclick="openRevision('math12ch2')">📖 Chapter 2 – Matrices</button>
+  </div>
+</div>
+<div id="physics12menu" class="page hidden">
+  <div class="card">
+    <h2>🔋 Class 12 Physics</h2>
+    <button onclick="openRevision('physics12ch1')">📖 Chapter 1 – Charges and Fields</button>
+    <button onclick="openRevision('physics12ch2')">📖 Chapter 2 – Electrostatic Potential</button>
+  </div>
+</div>
+<div id="chem12menu" class="page hidden">
+  <div class="card">
+    <h2>⚗️ Class 12 Chemistry</h2>
+    <button onclick="openRevision('chem12ch1')">📖 Chapter 1 – Solutions</button>
+    <button onclick="openRevision('chem12ch2')">📖 Chapter 2 – Chemical Formulas</button>
+  </div>
+</div>
+<div id="bio12menu" class="page hidden">
+  <div class="card">
+    <h2>🧬 Class 12 Biology</h2>
+    <button onclick="openRevision('bio12ch1')">📖 Chapter 1 – Reproduction</button>
+    <button onclick="openRevision('bio12ch2')">📖 Chapter 2 – Molecular Inheritance</button>
+  </div>
+</div>
+
+<!-- Revision Page (Supports MCQ and Short Answer) -->
+<div id="revisionPage" class="page hidden">
+  <button class="back-btn" onclick="showPage('home')">← Back to Dashboard</button>
+  <div class="card">
+    <h2 id="revisionTitle">Chapter Revision</h2>
+    <p id="revisionProgress" style="color: var(--text-muted); font-size: 13px; font-weight: 600;">Question 1 of 30</p>
+    <div id="revisionQuestion" style="font-size: 18px; margin: 20px 0; font-weight: 700;">Question Here</div>
+    
+    <!-- MCQ Options Container -->
+    <div id="mcqContainer" class="mcq-container"></div>
+
+    <!-- Text Input Mode (Only for Grammar) -->
+    <div id="textInputContainer" style="display:none;">
+      <input type="text" id="revisionAnswer" placeholder="Write your answer here" onkeypress="if(event.key==='Enter') checkTextAnswer()">
+      <button onclick="checkTextAnswer()">Submit Answer</button>
+    </div>
+
+    <div id="revisionResult" style="margin-top: 16px;"></div>
+    <button id="revisionNextBtn" style="display:none;" onclick="nextRevisionQuestion()">Next Question →</button>
+    
+    <div class="progressBar">
+      <div id="revisionProgressFill" class="progressFill"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Weekly Test -->
+<div id="weekly" class="page hidden">
+  <h2>📝 Weekly Test</h2>
+  <div class="card" style="text-align: center;">
+    <h3>🌟 Mega Weekly Test</h3>
+    <p style="margin-bottom: 20px; color: var(--text-muted);">10 random questions combined from all subjects in MCQ format.</p>
+    <button onclick="startWeeklyTest()" style="background: #e91e63;">Start Weekly Test</button>
+  </div>
+</div>
+
+<!-- Ask SH AI (Groq API Pre-Configured) -->
+<div id="asksh" class="page hidden">
+  <div class="card">
+    <h2>🤖 Ask SH AI (Powered by Groq)</h2>
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">AI Assistant Active hai! Koi bhi sawaal puchein:</p>
+    
+    <input type="text" id="askInput" placeholder="Ask any question (e.g., What is Newton's second law?)" onkeypress="if(event.key==='Enter') askSH()">
+    <button onclick="askSH()" id="askBtn">Ask Question</button>
+    <div id="askResult" style="margin-top:20px; white-space: pre-wrap; line-height: 1.6;"></div>
+  </div>
+</div>
+
+<!-- Profile Page -->
+<div id="profile" class="page hidden">
+  <div class="card">
+    <h2>👤 Student Profile</h2>
+    <p>SH Score: <b id="profileScore" style="color: var(--primary);">0</b></p><br>
+    <p>Completed Chapters: <b id="profileChapters">0</b></p><br>
+    <p>Rank: <b id="profileRank" style="color: var(--primary);">Beginner</b></p>
+  </div>
+</div>
+
+<footer>🚀 Student Hub V6 - Powered by Groq AI</footer>
+
+<script>
+// Pre-configured Groq API Key
+const DEFAULT_GROQ_KEY = "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";
+
+const motivations = [
+  "Success starts with one step.",
+  "Never stop learning.",
+  "Practice makes progress.",
+  "Dream big and work hard."
+];
+
+const quizzes = {
+selfintro: [
+{q:"What is your name?",a:"my name is"},{q:"How old are you?",a:"i am"},{q:"Where do you live?",a:"i live in"},{q:"Which class do you study in?",a:"i study in"},{q:"What is your favourite subject?",a:"my favourite subject is"},
+{q:"What is your school name?",a:"my school name is"},{q:"Who is your best friend?",a:"my best friend is"},{q:"What is your hobby?",a:"my hobby is"},{q:"What do you want to become?",a:"i want to become"},{q:"Where are you from?",a:"i am from"},
+{q:"What is your father name?",a:"my father name is"},{q:"What is your mother name?",a:"my mother name is"},{q:"Do you like English?",a:"yes i do"},{q:"Do you play games?",a:"yes i play"},{q:"What is your dream?",a:"my dream is"}
+],
+daily: [
+{q:"How are you?",a:"i am fine"},{q:"What are you doing?",a:"i am"},{q:"Where are you going?",a:"i am going"},{q:"What do you eat?",a:"i eat"},{q:"When do you wake up?",a:"i wake up"},
+{q:"What time is it?",a:"it is"},{q:"Where do you study?",a:"i study in"},{q:"What are you reading?",a:"i am reading"},{q:"Are you busy?",a:"yes i am"},{q:"Do you understand?",a:"yes i understand"}
+],
+greetings: [
+{q:"Morning greeting?",a:"good morning"},{q:"Evening greeting?",a:"good evening"},{q:"Night greeting?",a:"good night"},{q:"Thank someone?",a:"thank you"},{q:"Say sorry?",a:"sorry"},
+{q:"Welcome someone?",a:"welcome"},{q:"Ask how are you?",a:"how are you"},{q:"Reply fine?",a:"i am fine"},{q:"Say bye?",a:"goodbye"},{q:"Meet someone?",a:"nice to meet you"}
+],
+vocab: [
+{q:"Meaning of apple?",a:"fruit"},{q:"Meaning of book?",a:"reading material"},{q:"Meaning of pen?",a:"writing tool"},{q:"Meaning of school?",a:"education place"},{q:"Meaning of teacher?",a:"educator"},
+{q:"Meaning of student?",a:"learner"},{q:"Meaning of water?",a:"liquid"},{q:"Meaning of sun?",a:"star"},{q:"Meaning of moon?",a:"satellite"},{q:"Meaning of earth?",a:"planet"}
+],
+grammar: [
+{q:"What is noun?",a:"name of person place thing"},{q:"What is verb?",a:"action word"},{q:"What is adjective?",a:"describing word"},{q:"What is pronoun?",a:"replaces noun"},{q:"What is tense?",a:"time of action"},
+{q:"Present tense means?",a:"now"},{q:"Past tense means?",a:"before"},{q:"Future tense means?",a:"after"}
+],
+math10ch1:[
+{q:"What is a real number?",a:"number"},{q:"What is a rational number?",a:"p by q"},{q:"What is an irrational number?",a:"non terminating"},{q:"What is HCF?",a:"highest common factor"},{q:"What is LCM?",a:"least common multiple"},
+{q:"Pi is?",a:"irrational number"},{q:"Value of root 4?",a:"2"},{q:"Smallest prime number?",a:"2"},{q:"Is 0 rational?",a:"yes"},{q:"Is root 2 rational?",a:"no"}
+],
+math10ch2:[
+{q:"What is a polynomial?",a:"expression"},{q:"Degree of quadratic polynomial?",a:"2"},{q:"Linear polynomial degree?",a:"1"},{q:"Cubic polynomial degree?",a:"3"},{q:"What is zero of polynomial?",a:"value of x"}
+],
+physics10ch1:[
+{q:"What is light?",a:"form of energy"},{q:"What is reflection?",a:"bouncing back"},{q:"What is refraction?",a:"bending of light"},{q:"Light travels in?",a:"straight line"},{q:"Convex lens is?",a:"converging lens"}
+],
+physics10ch2:[
+{q:"What is electric current?",a:"flow of charge"},{q:"SI unit of current?",a:"ampere"},{q:"SI unit of resistance?",a:"ohm"},{q:"Instrument for current?",a:"ammeter"},{q:"Instrument for voltage?",a:"voltmeter"}
+],
+chem10ch1:[
+{q:"What is matter?",a:"mass and space"},{q:"States of matter?",a:"solid liquid gas"},{q:"Evaporation is?",a:"liquid to gas"},{q:"Condensation is?",a:"gas to liquid"},{q:"Melting is?",a:"solid to liquid"}
+],
+chem10ch2:[
+{q:"What is pH of neutral solution?",a:"7"},{q:"Acids turn litmus?",a:"red"},{q:"Bases turn litmus?",a:"blue"},{q:"Acid taste?",a:"sour"},{q:"Base taste?",a:"bitter"}
+],
+bio10ch1:[
+{q:"Basic unit of life?",a:"cell"},{q:"Who discovered cell?",a:"robert hooke"},{q:"Powerhouse of cell?",a:"mitochondria"},{q:"Control centre?",a:"nucleus"},{q:"Green pigment in plants?",a:"chlorophyll"}
+],
+bio10ch2:[
+{q:"Unit of nervous system?",a:"neuron"},{q:"Reflex action controlled by?",a:"spinal cord"},{q:"Main thinking part of brain?",a:"forebrain"},{q:"Plant growth hormone?",a:"auxin"},{q:"Thyroid secretes?",a:"thyroxine"}
+],
+math12ch1:[
+{q:"What is a relation?",a:"ordered pairs"},{q:"What is a function?",a:"special relation"},{q:"Set of inputs?",a:"domain"},{q:"Set of outputs?",a:"range"},{q:"Possible outputs set?",a:"codomain"}
+],
+math12ch2:[
+{q:"Horizontal arrangement in matrix?",a:"row"},{q:"Vertical arrangement in matrix?",a:"column"},{q:"Matrix with equal rows and columns?",a:"square matrix"},{q:"Matrix with all zeroes?",a:"null matrix"},{q:"Diagonal matrix with 1s?",a:"identity matrix"}
+],
+physics12ch1:[
+{q:"What is electric charge?",a:"property of matter"},{q:"Unit of charge?",a:"coulomb"},{q:"Like charges?",a:"repel"},{q:"Unlike charges?",a:"attract"},{q:"Region around charge?",a:"electric field"}
+],
+physics12ch2:[
+{q:"Unit of electric potential?",a:"volt"},{q:"Is potential scalar or vector?",a:"scalar"},{q:"Surface with equal potential?",a:"equipotential"},{q:"Device to store charge?",a:"capacitor"},{q:"Unit of capacitance?",a:"farad"}
+],
+chem12ch1:[
+{q:"What is solution?",a:"homogeneous mixture"},{q:"Substance dissolved?",a:"solute"},{q:"Dissolving medium?",a:"solvent"},{q:"Unit of molarity?",a:"mole per litre"},{q:"Water is?",a:"universal solvent"}
+],
+chem12ch2:[
+{q:"Water formula?",a:"h2o"},{q:"Common salt formula?",a:"nacl"},{q:"Ammonia formula?",a:"nh3"},{q:"Hydrochloric acid?",a:"hcl"},{q:"Sulphuric acid?",a:"h2so4"}
+],
+bio12ch1:[
+{q:"What is reproduction?",a:"producing offspring"},{q:"What is DNA?",a:"genetic material"},{q:"Unit of heredity?",a:"gene"},{q:"Male gamete?",a:"sperm"},{q:"Female gamete?",a:"ovum"}
+],
+bio12ch2:[
+{q:"Cell is?",a:"basic unit of life"},{q:"DNA stands for?",a:"deoxyribonucleic acid"},{q:"RNA stands for?",a:"ribonucleic acid"},{q:"Powerhouse?",a:"mitochondria"},{q:"Control centre?",a:"nucleus"}
+]
+};
+
+let currentQuiz = "";
+let currentQuestion = 0;
+let score = 0;
+
+/* PAGE SYSTEM */
+function showPage(pageId, btnElement) {
+  document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+  const target = document.getElementById(pageId);
+  if (target) target.classList.remove("hidden");
+
+  if (btnElement) {
+    document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+    btnElement.classList.add("active");
+  }
+
+  if (pageId === "profile") {
+    loadProfile();
+  }
+}
+
+/* MOTIVATION */
+function newMotivation(){
+  let random = Math.floor(Math.random() * motivations.length);
+  document.getElementById("motivationText").innerText = motivations[random];
+}
+
+/* REVISION SETUP */
+function openRevision(type){
+  if(!quizzes[type] || quizzes[type].length === 0){
+    alert("Questions are not added yet.");
+    return;
+  }
+  currentQuiz = type;
+  currentQuestion = 0;
+  score = 0;
+  showPage("revisionPage");
+  document.getElementById("revisionTitle").innerText = type.toUpperCase();
+  loadQuestion();
+}
+
+/* LOAD QUESTION & MCQ GENERATION */
+function loadQuestion(){
+  let q = quizzes[currentQuiz][currentQuestion];
+  document.getElementById("revisionQuestion").innerText = q.q;
+  document.getElementById("revisionResult").innerHTML = "";
+  document.getElementById("revisionNextBtn").style.display = "none";
+  document.getElementById("revisionProgress").innerText =
+    "Question " + (currentQuestion + 1) + " of " + quizzes[currentQuiz].length;
+  let percent = (currentQuestion / quizzes[currentQuiz].length) * 100;
+  document.getElementById("revisionProgressFill").style.width = percent + "%";
+
+  const mcqContainer = document.getElementById("mcqContainer");
+  const textInputContainer = document.getElementById("textInputContainer");
+
+  // Grammar section remains short answer typing
+  if (currentQuiz === "grammar") {
+    mcqContainer.style.display = "none";
+    textInputContainer.style.display = "block";
+    document.getElementById("revisionAnswer").value = "";
+  } else {
+    // MCQ Mode for all other chapters
+    textInputContainer.style.display = "none";
+    mcqContainer.style.display = "grid";
+    mcqContainer.innerHTML = "";
+
+    // Generate 4 Options (1 correct, 3 distractors)
+    let correctAns = q.a;
+    let pool = [];
+    for (let k in quizzes) {
+      pool = pool.concat(quizzes[k].map(item => item.a));
+    }
+    pool = [...new Set(pool)].filter(a => normalizeAnswer(a) !== normalizeAnswer(correctAns));
+    pool.sort(() => Math.random() - 0.5);
+    
+    let distractors = pool.slice(0, 3);
+    let options = [correctAns, ...distractors];
+    options.sort(() => Math.random() - 0.5);
+
+    options.forEach((opt, idx) => {
+      let btn = document.createElement("button");
+      btn.className = "mcq-btn";
+      btn.innerText = String.fromCharCode(65 + idx) + ") " + opt;
+      btn.onclick = () => selectMCQOption(opt, btn, correctAns);
+      mcqContainer.appendChild(btn);
+    });
+  }
+}
+
+function normalizeAnswer(text){
+  return text.toLowerCase().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim();
+}
+
+/* MCQ ANSWER CHECK */
+function selectMCQOption(selectedOpt, btnElement, correctAns) {
+  let allBtns = document.querySelectorAll(".mcq-btn");
+  allBtns.forEach(b => b.disabled = true);
+
+  if (normalizeAnswer(selectedOpt) === normalizeAnswer(correctAns)) {
+    score++;
+    btnElement.classList.add("correct-opt");
+    document.getElementById("revisionResult").innerHTML = "<span class='correct'>✅ Correct Answer!</span>";
+  } else {
+    btnElement.classList.add("wrong-opt");
+    allBtns.forEach(b => {
+      if (normalizeAnswer(b.innerText.substring(3)) === normalizeAnswer(correctAns)) {
+        b.classList.add("correct-opt");
+      }
+    });
+    document.getElementById("revisionResult").innerHTML = "<span class='wrong'>❌ Correct Answer: " + correctAns + "</span>";
+  }
+  document.getElementById("revisionNextBtn").style.display = "inline-block";
+}
+
+/* TEXT ANSWER CHECK (GRAMMAR ONLY) */
+function checkTextAnswer() {
+  let user = normalizeAnswer(document.getElementById("revisionAnswer").value);
+  let correct = normalizeAnswer(quizzes[currentQuiz][currentQuestion].a);
+
+  if (user.length > 0 && (user.includes(correct) || correct.includes(user))) {
+    score++;
+    document.getElementById("revisionResult").innerHTML = "<span class='correct'>✅ Correct Answer!</span>";
+  } else {
+    document.getElementById("revisionResult").innerHTML = "<span class='wrong'>❌ Correct Answer: " + quizzes[currentQuiz][currentQuestion].a + "</span>";
+  }
+  document.getElementById("revisionNextBtn").style.display = "inline-block";
+}
+
+/* NEXT QUESTION */
+function nextRevisionQuestion(){
+  currentQuestion++;
+  if(currentQuestion < quizzes[currentQuiz].length){
+    loadQuestion();
+  } else {
+    saveScore();
+    document.getElementById("revisionProgressFill").style.width = "100%";
+    alert("Chapter Completed!\nScore: " + score + " / " + quizzes[currentQuiz].length);
+    showPage("home");
+  }
+}
+
+/* WEEKLY TEST */
+function startWeeklyTest() {
+  let allQuestions = [];
+  for (let key in quizzes) {
+    if (key !== 'weeklyTest') {
+      allQuestions = allQuestions.concat(quizzes[key]);
+    }
+  }
+  allQuestions.sort(() => Math.random() - 0.5);
+  quizzes['weeklyTest'] = allQuestions.slice(0, 10);
+  openRevision('weeklyTest');
+}
+
+/* SCORE SYSTEM */
+function saveScore(){
+  let total = Number(localStorage.getItem("shScore") || 0) + score;
+  let chapters = Number(localStorage.getItem("chaptersDone") || 0) + 1;
+  localStorage.setItem("shScore", total);
+  localStorage.setItem("chaptersDone", chapters);
+  
+  document.getElementById("shScore").innerText = total;
+  document.getElementById("chaptersDone").innerText = chapters;
+  updateRank(total);
+}
+
+function updateRank(total){
+  let rank = "Beginner";
+  if(total >= 50) rank = "Learner";
+  if(total >= 100) rank = "Advanced";
+  if(total >= 200) rank = "Top Student";
+  document.getElementById("rank").innerText = rank;
+}
+
+function loadProfile(){
+  document.getElementById("profileScore").innerText = localStorage.getItem("shScore") || 0;
+  document.getElementById("profileChapters").innerText = localStorage.getItem("chaptersDone") || 0;
+  document.getElementById("profileRank").innerText = document.getElementById("rank").innerText;
+}
+
+/* GROQ AI INTEGRATION (Pre-configured) */
+async function askSH() {
+  let question = document.getElementById("askInput").value.trim();
+  let apiKey = DEFAULT_GROQ_KEY;
+
+  if (!question) return;
+
+  let askResult = document.getElementById("askResult");
+  let askBtn = document.getElementById("askBtn");
+
+  askResult.innerHTML = "<p style='color: var(--primary); font-weight: bold;'>🤖 SH AI is thinking...</p>";
+  askBtn.disabled = true;
+
+  try {
+    let response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + apiKey,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          { role: "system", content: "You are Student Hub AI, an encouraging and easy-to-understand educational assistant for students." },
+          { role: "user", content: question }
+        ]
+      })
+    });
+
+    let data = await response.json();
+    if (data.choices && data.choices[0]) {
+      askResult.innerText = data.choices[0].message.content;
+    } else if (data.error) {
+      askResult.innerHTML = "<span class='wrong'>Groq API Error: " + data.error.message + "</span>";
+    } else {
+      askResult.innerHTML = "<span class='wrong'>Error generating response.</span>";
+    }
+  } catch (err) {
+    askResult.innerHTML = "<span class='wrong'>Network Error! Check your internet connection.</span>";
+  } finally {
+    askBtn.disabled = false;
+  }
+}
+
+/* INITIALIZATION */
+window.onload = function(){
+  let total = localStorage.getItem("shScore") || 0;
+  let chapters = localStorage.getItem("chaptersDone") || 0;
+
+  document.getElementById("shScore").innerText = total;
+  document.getElementById("chaptersDone").innerText = chapters;
+  updateRank(Number(total));
+  showPage("home");
+};
+</script>
+</body>
+</html>
